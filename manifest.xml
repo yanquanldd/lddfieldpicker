@@ -8,9 +8,9 @@
   <Description DefaultValue="A template to get started."/>
   <IconUrl DefaultValue="https://lddfieldpicker.vercel.app/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://lddfieldpicker.vercel.app/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <SupportUrl DefaultValue="https://lddfieldpicker.vercel.app/help"/>
   <AppDomains>
-    <AppDomain>https://www.contoso.com</AppDomain>
+    <AppDomain>https://lddfieldpicker.vercel.app</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Document"/>
