@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import * as React from "react";
-import "./welcomePage.css";
+import "./WelcomePage.css";
 
 const WelcomePage: React.FC = () => {
   return (
