@@ -30,6 +30,7 @@ const ConditionInsertion: React.FC<InsertionProps> = ({
     customField: customField,
   });
 
+  // Insert the condition code at the selected pointer position
   const handleInsert = async (value: string) => {
     if (text.length > 0) {
       replaceText(value);
@@ -40,16 +41,19 @@ const ConditionInsertion: React.FC<InsertionProps> = ({
     handleClose();
   };
 
+  // Parse the condition text to the condition code format
   const parseConditionText = () => {
     return `{#${addedValues.condition} ${addedValues.field.join(".")}${addedValues.operator}${addedValues.customField}}`;
   };
 
+  // set field value
   const handleFieldSelect = (value: string[]) => {
     setField(value);
     setAddedValues({ ...addedValues, field: value });
     setActionSelected(undefined);
   };
 
+  // set the value of the condition, operator, or custom field
   function handleAction(actionType: string, value: string) {
     switch (actionType) {
       case "condition":
@@ -70,6 +74,7 @@ const ConditionInsertion: React.FC<InsertionProps> = ({
     setActionSelected(undefined);
   }
 
+  // clear added values
   const handleClear = () => {
     setField([]);
     setOperator("");

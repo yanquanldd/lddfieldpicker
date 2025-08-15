@@ -38,6 +38,7 @@ const PrintInsertion: React.FC<InsertionProps> = ({
     outputOption: outputOption,
   });
 
+  // Insert the print statement at the selected pointer position
   const handleInsert = async (value: string) => {
     if (text.length > 0) {
       replaceText(value);
@@ -48,6 +49,7 @@ const PrintInsertion: React.FC<InsertionProps> = ({
     handleClose();
   };
 
+  // Parse the print statement to the print code format
   const parsePrintText = () => {
     let parsedStr = "";
     if (!outputOption && !formatOption) {
@@ -63,12 +65,13 @@ const PrintInsertion: React.FC<InsertionProps> = ({
     return parsedStr;
   };
 
+  // clear the added values
   const handleClear = () => {
     setField([]);
     setFormatOption("");
     setOutputOption("");
     setAddedValues({
-      field: field,
+      field: "",
       formatOption: "",
       outputOption: "",
     });
@@ -84,6 +87,7 @@ const PrintInsertion: React.FC<InsertionProps> = ({
     setAddFilter(!addFilter);
   };
 
+  // set field value
   const handleFieldSelect = (value: string[]) => {
     setField(value);
     setAddedValues({ field: value, outputOption: "", formatOption: "" });
@@ -92,18 +96,21 @@ const PrintInsertion: React.FC<InsertionProps> = ({
     setActionSelected(undefined);
   };
 
+  // set output value
   const handleOutputSelect = (value: string) => {
     setOutputOption(value);
     setAddedValues({ ...addedValues, outputOption: value });
     setActionSelected(undefined);
   };
 
+  // set format value
   const handleFormatSelect = (value: string) => {
     setFormatOption(value);
     setAddedValues({ ...addedValues, formatOption: value });
     setActionSelected(undefined);
   };
 
+  // check if the field is related to money
   const checkIsMoney = () => {
     const targetObj = findNestedObject(sampleFields, "value", field[field.length - 1]);
     if (targetObj) return targetObj.isMoney;
@@ -112,6 +119,7 @@ const PrintInsertion: React.FC<InsertionProps> = ({
 
   const handleShow = () => setShow(true);
 
+  // find the fields under the current editing loop's field
   const getFieldsUnderCurrentLoopBlock = () => {
     const targetObj = sampleFields.fields.find((obj) => obj.label === currentLoopField);
     if (targetObj) return targetObj.children;

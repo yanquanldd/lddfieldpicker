@@ -1,5 +1,3 @@
-import { findLastIndex } from "./Helpers";
-
 /* eslint-disable no-undef */
 export async function insertText(text: string) {
   // Write text to the document.
@@ -15,6 +13,7 @@ export async function insertText(text: string) {
   }
 }
 
+// replace text in word editor after make edits
 export async function replaceText(text: string) {
   // Write text to the document.
   try {
@@ -29,6 +28,7 @@ export async function replaceText(text: string) {
   }
 }
 
+// detect the code at the cursor position
 export async function detectCursorText(update) {
   try {
     await Word.run(async (context) => {
@@ -72,6 +72,7 @@ export async function detectCursorText(update) {
   }
 }
 
+// delete the code at the cursor position
 export async function deleteCursorText() {
   try {
     await Word.run(async (context) => {

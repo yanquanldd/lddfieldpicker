@@ -26,6 +26,7 @@ export function areBracketsBalanced(str: string): boolean {
   return stack.length === 0;
 }
 
+// Check if the condition is valid
 export function isValidCondition(statement: string): boolean {
   const trimmedStatement = statement.trim();
   const regexIf = /^\s*if\s*\(.*?\)\s*(\{[^}]*\}|[^;]+);\s*$/;
@@ -39,6 +40,7 @@ export function isValidCondition(statement: string): boolean {
   return validIf || validIfElse || validIfElseIf;
 }
 
+// Check if the loop statement is valid
 export const isValidLoopStatement = (statement: string) => {
   const trimmedStatement = statement.trim();
 
@@ -53,6 +55,7 @@ export const isValidLoopStatement = (statement: string) => {
   return validFor || validWhile || validDoWhile;
 };
 
+// Convert selected code back to original label
 export const convertCodeToText = (codeList: string[], sourceList: any[], result: any[]) => {
   for (const code of codeList) {
     const matchObj = findNestedObject(sourceList, "value", code);
@@ -65,6 +68,7 @@ export const convertCodeToText = (codeList: string[], sourceList: any[], result:
   return result;
 };
 
+// Find the nested object by provided value
 export function findNestedObject(obj: any, key: string, value: any): any {
   // Check if the current object has the key and if it matches the value
   if (obj[key] === value) {
@@ -98,6 +102,7 @@ export function findLastIndex(str: string, chars: string[]): number {
   return lastIndex;
 }
 
+// get the type of the code based on the first character
 export const getCodeType = (str: string | undefined) => {
   if (!str) return CodeType.NONE;
   switch (str[0]) {
@@ -118,6 +123,7 @@ export const getCodeType = (str: string | undefined) => {
   }
 };
 
+// parse each code to original value by traversing the source list
 function parseEachCode(codeList: string[], sourceList: any) {
   const fieldResult = [];
   const customResult = [];
@@ -133,12 +139,14 @@ function parseEachCode(codeList: string[], sourceList: any) {
   return { field: fieldResult, custom: customResult };
 }
 
+// decode the comment code to readable value
 export function readComment(text: string | undefined, sourceList: any) {
   const valueList = text.split(" ");
   const result = parseEachCode(valueList, sourceList);
   return { comment: result.custom.join(" ") };
 }
 
+// decode the condition code to readable value
 export function readCondition(text: string | undefined, sourceList: any) {
   const valueList = text.split(" ");
   const result = parseEachCode(valueList, sourceList);
@@ -164,6 +172,7 @@ export function readCondition(text: string | undefined, sourceList: any) {
   return decodedInfo;
 }
 
+// decode the print code to readable value
 export function readPrintStatement(text: string | undefined, sourceList: any, formatOptions: string[]) {
   let fieldsLabelList = [];
   let format;
@@ -192,6 +201,7 @@ export function readPrintStatement(text: string | undefined, sourceList: any, fo
   };
 }
 
+// decode the loop code to readable value
 export function readLoopStatement(text: string | undefined, sourceList: any) {
   const decodedInfo = {
     loopBlock: "",
@@ -219,8 +229,9 @@ export function readLoopStatement(text: string | undefined, sourceList: any) {
     });
     decodedInfo.field = fieldInfo;
   };
-
-  if (!text.includes("|")) {
+  if (text.includes("endforeach")) {
+    decodedInfo.customField = "endforeach";
+  } else if (!text.includes("|")) {
     parseLoopWithoutFilter(text);
   } else {
     const loopStr = text.slice(0, text.indexOf("|"));
@@ -233,6 +244,7 @@ export function readLoopStatement(text: string | undefined, sourceList: any) {
   return decodedInfo;
 }
 
+// decode the include code to readable value
 export function readIncludeStatement(text: string | undefined) {
   let fileName;
   if (!text.includes("params")) {

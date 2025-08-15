@@ -5,6 +5,7 @@ interface SelectedFieldsTableProps {
   entries: any;
 }
 
+// Object that renders the detected selected fields when modifying the code
 const SelectedFieldsTable: React.FC<SelectedFieldsTableProps> = ({ entries }) => {
   const [info, setInfo] = useState(Object.entries(entries));
 

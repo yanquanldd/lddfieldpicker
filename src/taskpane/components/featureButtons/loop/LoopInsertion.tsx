@@ -37,6 +37,9 @@ const LoopInsertion: React.FC<InsertionProps> = ({
     filterCustomField: filterCustomField,
   });
 
+  // Insert the loop statement at the selected pointer position
+  // if it is not endforeach, then it is a loop code and set loop field
+  // otherwise, insert the endforeach statement
   const handleInsert = async (value: string) => {
     if (text.length > 0) {
       replaceText(value);
@@ -54,16 +57,19 @@ const LoopInsertion: React.FC<InsertionProps> = ({
     handleClose();
   };
 
+  // Parse the loop statement to the loop code format
   const parseLoopText = () => {
     return `{#${addedValues.loopBlock}${addedValues.limit ? `-${addedValues.limit}-` : ""}foreach ${addedValues.field ? addedValues.field.join(".") : addedValues.customField}${addedValues.filter ? `|${addedValues.filter}:${addedValues.filterCustomField}` : ""}}`;
   };
 
+  // set field value
   const handleFieldSelect = (value: string[]) => {
     setField(value);
     setAddedValues({ ...addedValues, field: value });
     setActionSelected(undefined);
   };
 
+  // set the value of the loop block, limit, filter, or custom field
   function handleAction(actionType: string, value: string) {
     switch (actionType) {
       case "loopBlock":
@@ -93,6 +99,7 @@ const LoopInsertion: React.FC<InsertionProps> = ({
     setActionSelected(undefined);
   }
 
+  // clear the added values
   const handleClear = () => {
     setLimit("");
     setField([]);

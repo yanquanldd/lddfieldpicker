@@ -21,6 +21,7 @@ const CommentInsertion: React.FC<InsertionProps> = ({
     comment: comment,
   });
 
+  // Insert the comment code at the selected pointer position
   const handleInsert = async (value: string) => {
     if (text.length > 0) {
       replaceText(value);
@@ -31,16 +32,19 @@ const CommentInsertion: React.FC<InsertionProps> = ({
     handleClose();
   };
 
+  // Parse the comment text to the comment code format
   const parseCommentText = () => {
     return `{!${addedValues.comment}}`;
   };
 
+  // set comment value
   const handleCommentAdd = () => {
     setComment("");
     setAddedValues({ ...addedValues, comment: comment });
     setActionSelected(undefined);
   };
 
+  // clear comment value
   const handleClear = () => {
     setComment("");
     setAddedValues({

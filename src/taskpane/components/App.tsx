@@ -42,10 +42,12 @@ const App: React.FC<AppProps> = () => {
   const [modifyCode, setModifyCode] = useState<boolean>(true);
   const [showNotCodeError, setShowNotCodeError] = useState(false);
 
+  // detect the code whenever Modify code button is clicked
   const handleModifyCodeClick = () => {
     detectCursorText(setText);
   };
 
+  // when updating the code, enable the Modify code button again and clear the detected code
   const handleTextUpdate = (text: string) => {
     updateCursorText(text);
     setModifyCode(true);
@@ -168,7 +170,11 @@ const App: React.FC<AppProps> = () => {
         </div>
       )}
       {renderEditSection(getDecodedInfo(text))}
-      {modifyCode && <button onClick={() => handleModifyCodeClick()}>Modify code</button>}
+      {modifyCode && (
+        <div className="container d-flex justify-content-end">
+          <button onClick={() => handleModifyCodeClick()}>Modify code</button>
+        </div>
+      )}
       {showNotCodeError && (
         <Alert variant="danger" onClose={() => setShowNotCodeError(false)} dismissible>
           <Alert.Heading>Error</Alert.Heading>

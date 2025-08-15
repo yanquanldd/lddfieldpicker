@@ -4,6 +4,7 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { sampleFields } from "../../../assets/constants.js";
 import { JsonTreeSelectListProps } from "../../types.js";
 
+// Object that renders the field selection tree
 const JsonTreeSelectList: React.FC<JsonTreeSelectListProps> = ({ data, updateChecked, isLoop = false }) => {
   const [checked, setChecked] = useState([]);
   const [expanded, setExpanded] = useState([]);

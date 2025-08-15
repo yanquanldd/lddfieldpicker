@@ -29,6 +29,7 @@ const IncludeInsertion: React.FC<InsertionProps> = ({
     params: params,
   });
 
+  // Insert the include statement at the selected pointer position
   const handleInsert = async (value: string) => {
     if (text.length > 0) {
       replaceText(value);
@@ -39,10 +40,12 @@ const IncludeInsertion: React.FC<InsertionProps> = ({
     handleClose();
   };
 
+  // Parse the include statement to the include code format
   const parseIncludeText = () => {
     return `{#include ${addedValues.fileName}${addedValues.params.length > 0 ? ` params ${addedValues.params.join(" params ")}` : ""}}`;
   };
 
+  // set the value of the filename or param
   const handleValueAdd = (valueType: string) => {
     if (valueType === "fileName") {
       setAddedValues({ ...addedValues, fileName: fileName });
@@ -55,6 +58,7 @@ const IncludeInsertion: React.FC<InsertionProps> = ({
     setActionSelected(undefined);
   };
 
+  // clear the added values
   const handleClear = () => {
     setParams([]);
     setFileName("");
